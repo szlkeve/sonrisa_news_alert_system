@@ -1,7 +1,7 @@
-import type { Article } from '../../shared/types';
+import { AlertService } from "../../shared/types";
 
-export function logArticles(articles: Article[]): void {
+export const logArticles: AlertService = async (articles) => {
   for (const article of articles) {
     console.log(`[BREAKING] ${article.title} — ${article.source.name} (${article.publishedAt})`);
   }
-}
+};

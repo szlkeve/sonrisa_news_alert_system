@@ -20,18 +20,18 @@ describe('logArticles', () => {
     logSpy.mockRestore();
   });
 
-  it('logs nothing for an empty array', () => {
-    logArticles([]);
+  it('logs nothing for an empty array', async () => {
+    await logArticles([]);
     expect(logSpy).not.toHaveBeenCalled();
   });
 
-  it('logs one line per article', () => {
-    logArticles([makeArticle(), makeArticle({ url: 'https://example.com/2' })]);
+  it('logs one line per article', async () => {
+    await logArticles([makeArticle(), makeArticle({ url: 'https://example.com/2' })]);
     expect(logSpy).toHaveBeenCalledTimes(2);
   });
 
-  it('formats the log line correctly', () => {
-    logArticles([makeArticle()]);
+  it('formats the log line correctly', async () => {
+    await logArticles([makeArticle()]);
     expect(logSpy).toHaveBeenCalledWith(
       '[BREAKING] Big News — BBC (2024-01-01T00:00:00Z)'
     );

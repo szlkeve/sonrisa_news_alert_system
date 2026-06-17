@@ -8,3 +8,5 @@ export type Article = {
 export type NewsApiResponse = {
   articles: Article[];
 };
+
+export type AlertService = (articles: Article[]) => Promise<void>;

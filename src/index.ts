@@ -20,7 +20,7 @@ async function tick(): Promise<void> {
   try {
     const { newArticles, seen: updatedSeen } = await poll(seen, fetcher);
     seen = updatedSeen;
-    logArticles(newArticles);
+    await logArticles(newArticles);
   } catch (err) {
     console.error('Poll failed:', err instanceof Error ? err.message : err);
   }
