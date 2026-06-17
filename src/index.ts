@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import { createFetcher } from './services/api/api';
 import { poll } from './services/poller/poller';
+import { logArticles } from './services/alert/alert';
 
 dotenv.config();
 
@@ -19,9 +20,7 @@ async function tick(): Promise<void> {
   try {
     const { newArticles, seen: updatedSeen } = await poll(seen, fetcher);
     seen = updatedSeen;
-    for (const article of newArticles) {
-      console.log(`[BREAKING] ${article.title} — ${article.source.name} (${article.publishedAt})`);
-    }
+    logArticles(newArticles);
   } catch (err) {
     console.error('Poll failed:', err instanceof Error ? err.message : err);
   }
