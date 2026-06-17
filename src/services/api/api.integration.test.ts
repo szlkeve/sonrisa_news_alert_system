@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import { createFetcher } from './api';
-import type { Article } from '../shared/types';
+import type { Article } from '../../shared/types';
 
 dotenv.config();
 

@@ -1,5 +1,5 @@
 import { poll } from './poller';
-import type { NewsApiResponse } from '../shared/types';
+import type { NewsApiResponse } from '../../shared/types';
 
 const makeArticle = (url: string, title = 'Title', source = 'Source') => ({
   title,

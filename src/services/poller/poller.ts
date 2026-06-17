@@ -1,4 +1,4 @@
-import type { Article, NewsApiResponse } from '../shared/types';
+import type { Article, NewsApiResponse } from '../../shared/types';
 
 export type PollResult = {
   newArticles: Article[];
