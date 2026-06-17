@@ -1,6 +1,7 @@
 import type { Transporter } from 'nodemailer';
 import { logArticles } from './alert';
 import { createEmailAlerter } from './email';
+import { createSlackAlerter } from './slack';
 import type { AlertService, Article } from '../../shared/types';
 
 const makeArticle = (overrides: Partial<Article> = {}): Article => ({
@@ -46,4 +47,8 @@ testAlertServiceContract('logArticles', () => {
 
 testAlertServiceContract('createEmailAlerter', () =>
   createEmailAlerter(makeFakeTransporter(), { from: 'from@test.com', to: 'to@test.com' })
+);
+
+testAlertServiceContract('createSlackAlerter', () =>
+  createSlackAlerter('https://hooks.slack.com/fake', jest.fn().mockResolvedValue(undefined))
 );
