@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { createFetcher } from './newsapi';
+import { createFetcher } from './services/api';
 import { poll } from './poller';
 
 dotenv.config();

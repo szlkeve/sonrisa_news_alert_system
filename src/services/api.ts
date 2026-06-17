@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { NewsApiResponse } from './shared/types';
+import type { NewsApiResponse } from '../shared/types';
 
 export function createFetcher(apiKey: string): () => Promise<NewsApiResponse> {
   return () =>
