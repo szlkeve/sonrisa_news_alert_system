@@ -1,6 +1,6 @@
-import type { Article, NewsApiResponse } from './shared/types';
+import type { Article, NewsApiResponse } from '../shared/types';
 
-type PollResult = {
+export type PollResult = {
   newArticles: Article[];
   seen: Set<string>;
 };
