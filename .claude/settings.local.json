@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Skill(update-config)"
+    ],
+    "deny": [
+      "Read(**/.env*)"
+    ]
+  }
+}
