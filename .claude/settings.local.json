@@ -2,10 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npm install *)",
-      "Skill(update-config)"
-    ],
-    "deny": [
-      "Read(**/.env*)"
+      "Skill(update-config)",
+      "Bash(npm run *)"
     ]
   }
 }

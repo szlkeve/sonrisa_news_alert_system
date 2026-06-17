@@ -12,8 +12,20 @@ if (!NEWSAPI_KEY) {
   process.exit(1);
 }
 
-const seen = new Set<string>();
+let seen = new Set<string>();
 const fetcher = createFetcher(NEWSAPI_KEY);
 
-void poll(seen, fetcher);
-setInterval(() => void poll(seen, fetcher), POLL_INTERVAL_MS);
+async function tick(): Promise<void> {
+  try {
+    const { newArticles, seen: updatedSeen } = await poll(seen, fetcher);
+    seen = updatedSeen;
+    for (const article of newArticles) {
+      console.log(`[BREAKING] ${article.title} — ${article.source.name} (${article.publishedAt})`);
+    }
+  } catch (err) {
+    console.error('Poll failed:', err instanceof Error ? err.message : err);
+  }
+}
+
+void tick();
+setInterval(() => void tick(), POLL_INTERVAL_MS);
