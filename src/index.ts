@@ -5,6 +5,8 @@ import { logArticles } from "./services/alert/alert";
 import { AlertService } from "./shared/types";
 import { createEmailAlerter } from "./services/alert/email";
 import nodemailer from "nodemailer";
+import { createSlackAlerter } from "./services/alert/slack";
+import axios from "axios";
 
 dotenv.config();
 
@@ -36,7 +38,19 @@ const emailAlerter = createEmailAlerter(transporter, {
   from: EMAIL_FROM,
   to: EMAIL_TO,
 });
-const alerts: AlertService[] = [logArticles, emailAlerter];
+const { SLACK_WEBHOOK_URL } = process.env;
+
+if (!SLACK_WEBHOOK_URL) {
+  throw new Error(
+    "SLACK_WEBHOOK_URL must be set in .env to run Slack integration tests",
+  );
+}
+const poster = async (url: string, data: object) => {
+  await axios.post(url, data);
+};
+const slackAlerter = createSlackAlerter(SLACK_WEBHOOK_URL, poster);
+
+const alerts: AlertService[] = [logArticles, emailAlerter, slackAlerter];
 
 async function tick(): Promise<void> {
   try {
