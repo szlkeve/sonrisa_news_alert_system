@@ -1,0 +1,11 @@
+{
+  "name": "sonrisa_homework",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "run_background_process": "npm run dev -w background_process",
+    "test": "npm test --workspaces --if-present"
+  }
+}

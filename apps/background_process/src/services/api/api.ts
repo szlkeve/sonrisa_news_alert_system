@@ -5,7 +5,7 @@ export function createFetcher(apiKey: string): () => Promise<NewsApiResponse> {
   return () =>
     axios
       .get<NewsApiResponse>('https://newsapi.org/v2/top-headlines', {
-        params: { q: 'breaking', language: 'en', pageSize: 20 },
+        params: { country: 'us', pageSize: 20 },
         headers: { 'X-Api-Key': apiKey },
       })
       .then((r) => r.data);

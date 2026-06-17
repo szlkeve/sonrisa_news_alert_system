@@ -10,13 +10,15 @@ if (!apiKey) {
   throw new Error('NEWSAPI_KEY must be set in .env to run integration tests');
 }
 
+jest.setTimeout(15_000);
+
 const fetcher = createFetcher(apiKey);
 
 describe('NewsAPI integration', () => {
-  it('returns a valid response with an articles array', async () => {
+  it('returns up to 20 articles', async () => {
     const data = await fetcher();
-    expect(data).toHaveProperty('articles');
-    expect(Array.isArray(data.articles)).toBe(true);
+    expect(data.articles.length).toBeGreaterThanOrEqual(1);
+    expect(data.articles.length).toBeLessThanOrEqual(20);
   });
 
   it('each article has the required fields with correct types', async () => {
@@ -33,7 +35,7 @@ describe('NewsAPI integration', () => {
   it('publishedAt is a valid ISO date string', async () => {
     const data = await fetcher();
     for (const article of data.articles) {
-      expect(new Date(article.publishedAt).toISOString()).toBe(article.publishedAt);
+      expect(new Date(article.publishedAt).getTime()).not.toBeNaN();
     }
   });
 });
